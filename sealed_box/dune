@@ -1,0 +1,3 @@
+(library
+ (name sealed_box)
+ (libraries core ttweetnacl hacl-star base64))
