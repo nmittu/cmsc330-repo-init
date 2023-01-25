@@ -1,6 +1,9 @@
 open! Core
 open Ttweetnacl.Crypto
 
+(* Based of of the ttweetnacl sealed box implementation:
+   https://github.com/whs/tweetnacl-sealed-box*)
+
 type key = Box.Public_key.t
 type bytes = Bytes.t
 
