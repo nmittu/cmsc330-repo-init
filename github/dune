@@ -1,0 +1,3 @@
+(library
+ (name github)
+ (libraries core cohttp cohttp-lwt-unix yojson core_unix core_unix.sys_unix))

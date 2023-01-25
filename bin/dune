@@ -1,0 +1,4 @@
+(executable
+ (public_name 330_project_setup)
+ (name main)
+ (libraries github))
