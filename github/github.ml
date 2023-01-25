@@ -10,7 +10,7 @@ type t = {
 }
 
 
-let client_id = "bd1606f7ca00fe537411"
+let client_id = Sys.getenv_exn "CMSC330CLIENTID"
 
 let rec poll_token device_code interval =
   let* () = Lwt_unix.sleep (Int.to_float interval) in
@@ -61,6 +61,10 @@ let read_tok () =
   if Sys_unix.file_exists_exn config_file then
     Some (In_channel.read_all config_file)
   else None
+
+let refresh_auth () =
+  let auth = get_new_auth () in
+  save_token auth
 
 let get_auth () =
   match read_tok () with
@@ -116,6 +120,6 @@ let set_secret t ~key ~value =
             ; "key_id", `String key_id])))
       (Uri.of_string url) in
       let response_code = resp |> Response.status |> Cohttp.Code.code_of_status in
-      Lwt.return (response_code = 201) in
+      Lwt.return (response_code = 201 || response_code = 204) in
     Lwt_main.run lwt
 
